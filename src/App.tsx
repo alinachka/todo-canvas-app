@@ -79,6 +79,12 @@ export const App: FC = memo(() => {
   const doneNote = (title: string) => {
     assistantRef.current?.sendData({ action: { action_id: 'done', parameters: { title } } });
   };
+  const [check, setCheck] = useState(false);
+  const handleCheckChange = (e: React.MouseEvent<HTMLInputElement>, key: string) => {
+    console.log("check", e);
+    setCheck(!check);
+    console.log("I am state", check);
+  };
 
   return (
       <main className="container">
@@ -117,6 +123,7 @@ export const App: FC = memo(() => {
                     className="done-note"
                     type="checkbox"
                     checked={note.completed}
+                    onClick={(e) => handleCheckChange(e, "some string")}
                     onChange={() => doneNote(note.title)}
                     disabled={note.completed}
                 />
